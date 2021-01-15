@@ -8,11 +8,11 @@ It supports a number of command line arguments, call it with `-h` to see the det
 
 Here a sample run:
 
-`python3 send-results.py --course-name DA2004 --lab-n 2 --from-name "Stefano Ottolenghi" --from-email "stefano@math.su.se" --feedback-file ex-DA2004-lab2.txt --dry-run`
+`python3 send-results.py --course-name DA2004 --lab-n 2 --from-name "Stefano Ottolenghi" --from-email "stefano@math.su.se" --feedback-file ex-DA2004-lab2.txt`
 
-This will take feedback contained in the file `ex-DA2004-lab2.txt`, build emails for it, and output them all in a single html file as a preview (which, if you are on linux, should pop up in the browser automatically - otherwise, look for a file called `preview-COURSENAME-LABN.html` in the directory where you run the script. This is you have `--dry-run` as above.
+This will take feedback contained in the file `ex-DA2004-lab2.txt`, build emails for it, and output them all in a single html file as a preview (which, if you are on linux, should pop up in the browser automatically - otherwise, look for a file called `preview-COURSENAME-LABN.html` in the directory where you run the script.
 
-Omitting the argument `--dru-run` will instead result in emails being sent and no preview to be generated. As a sanity check, I used to have an email to myself as well at the top of the feedback list.
+Adding the argument `--send` will instead result in emails being sent and no preview to be generated. As a sanity check, I used to have an email to myself as well at the top of the feedback list.
 
 ## Feedback structure
 A sample file containing feedback `ex-DA2004-lab2.txt` is provided so you can have a look at the structure yourself, but the constraints to keep in mind when noting down the feedback are (important!):
