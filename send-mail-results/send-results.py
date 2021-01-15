@@ -22,34 +22,39 @@ statuses = ['pass', 'fail', 'review']
 parser = argparse.ArgumentParser()
 parser.add_argument(
     '--from-name',
+    required=True,
     dest='from_name',
     help='Name from which email is shown to come from')
 parser.add_argument(
     '--from-email',
+    required=True,
     dest='from_email',
     help='Email from which email is shown to come from')
 parser.add_argument(
     '--lab-n',
+    required=True,
     type=int,
     dest='lab_n',
     help='Lab number feedback is about')
 parser.add_argument(
     '--course-name',
+    required=True,
     dest='course_name',
     help='Course name you are working with (ex. DA2004)')
 parser.add_argument(
     '--feedback-file',
+    required=True,
     dest='feedback_file',
     help='File path in which feedback for this lab is to be found.')
 parser.add_argument(
-    '--dry-run',
+    '--send',
     #type=bool,
     default=False,
     action='store_true',
-    dest='dry_run',
+    dest='no_dry_run',
     help='Simulate email sending without actually sending them')
 args = parser.parse_args()
-
+print(args)
 print('\n== On behalf of {} <{}>; lab {} of course {} ==\n'.format(
     args.from_name, args.from_email, args.lab_n, args.course_name))
 
@@ -60,7 +65,7 @@ for status in statuses:
         templates[status] = f.read().replace("\n", "<br />\n")
 
 # open file to store feedback preview on dry run
-if args.dry_run:
+if not args.no_dry_run:
 	preview = open('preview-{}-lab{}.html'.format(args.course_name, args.lab_n), 'w')
 
 headers = """From: {from-name} <{from-email}>
@@ -76,7 +81,7 @@ Content-type: text/html
 emails = {}
 
 #Open a connection with smtp.su.se and authenticate
-if not args.dry_run:
+if args.no_dry_run:
 	try:
 		server = smtplib.SMTP_SSL("smtp.su.se", 465, context=ssl.create_default_context())
 		username = input("Enter SU username: ")
@@ -140,12 +145,12 @@ with open(args.feedback_file) as lab_feedback:
 			'content': mail_content
 		}
 		
-		if args.dry_run:
+		if not args.no_dry_run:
 			preview.write(mail_content+'<br /><hr /><br />')
 		
 
 # open preview in browser if dry run
-if args.dry_run:
+if not args.no_dry_run:
 	system('sensible-browser "preview-{}-lab{}.html"'.format(args.course_name, args.lab_n))
 
 # actually send emails otherwise
@@ -156,6 +161,7 @@ else:
 	server.close()
 
 # print stats
+print('\n')
 for status in statuses:
     print('== {} students with status {} =='.format(len(stats[status]), status))
     print('\n'.join(map(str, stats[status])))
