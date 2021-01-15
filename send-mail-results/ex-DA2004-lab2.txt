@@ -14,3 +14,8 @@ You must guess a number!
 Too low```
 - your function `create_all_pairs_rec` does not use `map`, as per specifications. Also, the case `if len(xs) == 0 or len(ys) == 0:` is useless
 - to count words, `len(line.split())` is enough, no need to have `is_word()`
+
+
+Cannoli Canneloni
+cannoli@canneloni.it
+none
