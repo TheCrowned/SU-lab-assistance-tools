@@ -30,6 +30,8 @@ even with an empty line it's okay, as long as it's not 2 (otherwise it becomes a
 - last feedback line
 ```
 
+If there is no specific feedback for a student, still include a point
+
 My convention is to note with a star the feedback points that were compulsory to be corrected to pass the lab, in case the current result was fail. I also always put them at the top for clarity.
 
 The current statuses are `pass, fail, review, none` and should all be self-explanatory, except for `none`. That is used for a student who did not submit anything for that lab. The only manual work needed at course start is to create a feedback template file, with all students names and emails and the correct structure, to duplicate and to write into for every lab.
