@@ -1,9 +1,11 @@
 Hej {to-name},
 this is about lab {lab-n} of {course-name}.
 
-You have done a <strong>good job so far, but there are some things that really have to be reviewed before the lab can be considered as passed</strong>. Below you find the tasks that require review and tips on how to do so. <strong>Tasks marked with a star * are required</strong> to be reviewed, the others are NOT required (but you may of course tackle them as well). 
+You have done a <strong>good job so far, but there are some things that really have to be reviewed before the lab can be considered as passed</strong>. Below you find the tasks that require review and tips on how to do so. <strong>Tasks marked with a star * are required</strong> to be reviewed, while the others are NOT required (but you may of course tackle them as well). 
 
-After you have fixed the issues, <strong>you will have to show and present the new code to me during a lab session</strong> (and may also ask for further help there, if needed).
+After you have fixed the issues, <strong>you will have to <em>(in this order)</em>:
+1. show and present the new code to me during a lab session</strong> (and may also ask for further help there, if needed);
+<strong>2. send the updated code to {course-teacher} by email.</strong>
 
 You may also find other tips for future improvement and/or positive comments. Please do take some time to go through them: I would expect you to incorporate this advice in future labs, when facing similar scenarios :) You may, of course, get back for further clarification if needed. 
 
