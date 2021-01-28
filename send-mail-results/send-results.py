@@ -16,7 +16,7 @@ import sys
 
 # Expects to find a file with name STATUS.txt
 # for each STATUS below, located in the directory mail-templates
-statuses = ['pass', 'fail', 'review']
+statuses = ['pass', 'minor', 'review', 'fail']
 
 # Teachers to whom to send revisions (for plagiarism checks)
 courses_teachers = {
@@ -118,11 +118,11 @@ with open(args.feedback_file) as lab_feedback:
             tips_list = '<em>Nothing special to say for this lab!</em>'
 
         # pick correct email template depending on lab student status
-        if status in ['pass', 'fail', 'review']:
+        if status == 'none': #no hand in
+            continue
+        else:
             mail_content = templates[status]
             stats[status].append(stud_name)
-        elif status == 'none': # no hand in
-            continue
 
         #swedish chars in names need to go away
         #for runtime errors on this line, make sure you running with python3
