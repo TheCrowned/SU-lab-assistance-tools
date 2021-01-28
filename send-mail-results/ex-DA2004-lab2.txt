@@ -7,7 +7,7 @@ pass
 
 Viktor Johansson
 stefano_95@hotmail.it
-fail
+review
 - * if a string is given in the guessing game, a message is displayed but the software does also go on to check whether the number is smaller or bigger than the target:
 ```Guess a number! q
 You must guess a number!
@@ -18,4 +18,4 @@ Too low```
 
 Cannoli Canneloni
 cannoli@canneloni.it
-none
+fail

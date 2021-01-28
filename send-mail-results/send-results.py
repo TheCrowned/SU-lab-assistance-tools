@@ -61,7 +61,15 @@ parser.add_argument(
     help='Simulate email sending without actually sending them')
 args = parser.parse_args()
 
-print('\n== On behalf of {} <{}>; lab {} of course {} ==\n'.format(
+print() #nice output
+
+try:
+    course_teacher = courses_teachers[args.course_name]
+except Exception:
+    print('No match for teacher with the given course name. Is the name {} correct?'.format(args.course_name))
+    sys.exit()
+
+print('== On behalf of {} <{}>; lab {} of course {} ==\n'.format(
     args.from_name, args.from_email, args.lab_n, args.course_name))
 
 # Fetch templates for all statuses
@@ -118,11 +126,8 @@ with open(args.feedback_file) as lab_feedback:
             tips_list = '<em>Nothing special to say for this lab!</em>'
 
         # pick correct email template depending on lab student status
-        if status == 'none': #no hand in
-            continue
-        else:
-            mail_content = templates[status]
-            stats[status].append(stud_name)
+        mail_content = templates[status]
+        stats[status].append(stud_name)
 
         #swedish chars in names need to go away
         #for runtime errors on this line, make sure you running with python3
@@ -135,7 +140,7 @@ with open(args.feedback_file) as lab_feedback:
         mail_content = mail_content.replace('{from-name}', args.from_name)
         mail_content = mail_content.replace('{from-email}', args.from_email)
         mail_content = mail_content.replace('{course-name}', args.course_name)
-        mail_content = mail_content.replace('{course-teacher}', courses_teachers[args.course_name])
+        mail_content = mail_content.replace('{course-teacher}', course_teacher)
         mail_content = mail_content.replace('{lab-n}', str(args.lab_n))
 
         #tips should be a bulleted list with dashes
