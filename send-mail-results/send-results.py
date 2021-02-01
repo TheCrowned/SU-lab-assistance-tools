@@ -110,7 +110,7 @@ print() #nice output
 
 #with open('{}-lab{}.txt'.format(args.course_name, args.lab_n)) as lab_feedback:
 with open(args.feedback_file) as lab_feedback:
-    stats = {status: [] for status in statuses} # for final counts
+    stats = {status: [] for status in statuses}; skipped = [] # for final counts
 
     #different students are separated by 3 newlines
     students = lab_feedback.read().split('\n\n\n')
@@ -126,8 +126,12 @@ with open(args.feedback_file) as lab_feedback:
             tips_list = '<em>Nothing special to say for this lab!</em>'
 
         # pick correct email template depending on lab student status
-        mail_content = templates[status]
-        stats[status].append(stud_name)
+        if status == 'none': #skip students with none status
+            skipped.append(stud_name)
+            continue
+        else:
+            mail_content = templates[status]
+            stats[status].append(stud_name)
 
         #swedish chars in names need to go away
         #for runtime errors on this line, make sure you running with python3
@@ -181,3 +185,4 @@ else:
 for status in statuses:
     print('\n== {} students with status {} =='.format(len(stats[status]), status))
     print('\n'.join(map(str, stats[status])))
+print('\n== {} students skipped =='.format(len(skipped)))
