@@ -121,9 +121,10 @@ with open(args.feedback_file) as lab_feedback:
         stud_name = splitted_single[0]
         stud_email = splitted_single[1]
         status = splitted_single[2]
-
-        tips_list = student[student.find('- '):].strip()
-        if tips_list == '-':
+        print(splitted_single)
+        if len(splitted_single) >= 4 and '-' in splitted_single[3]:
+            tips_list = student[student.find('- '):].strip()
+        else:
             tips_list = '<em>Nothing special to say for this lab!</em>'
 
         # pick correct email template depending on lab student status
