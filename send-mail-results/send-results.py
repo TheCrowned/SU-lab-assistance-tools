@@ -21,7 +21,8 @@ statuses = ['pass', 'minor', 'review', 'fail']
 # Teachers to whom to send revisions (for plagiarism checks)
 courses_teachers = {
     'DA2004': 'Anders Mortberg',
-    'DA2005': 'Lars Arvestad'
+    'DA2005': 'Lars Arvestad',
+    'MM5016': 'Stefano Ottolenghi' #for labs
 }
 
 # Get arguments from commandline - call with -h for help
@@ -75,7 +76,7 @@ print('== On behalf of {} <{}>; lab {} of course {} ==\n'.format(
 # Fetch templates for all statuses
 templates = {}
 for status in statuses:
-    with open('mail-templates/'+status+'.txt') as f:
+    with open('mail-templates/'+args.course_name+'/'+status+'.txt') as f:
         templates[status] = f.read().replace("\n", "<br />\n")
 
 # open file to store feedback preview on dry run
