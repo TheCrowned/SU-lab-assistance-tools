@@ -1,0 +1,9 @@
+Hej {to-name},
+this is about lab {lab-n} of {course-name}.
+
+Unfortunately, either you did not submit anything for this lab or the code you submitted was not a serious enough attempt. <strong>You will have to resubmit the lab at the next course edition</strong>. 
+
+You may still tackle and submit the next labs, and, if passed, those will count as passed for the next semester as well. You may not resubmit {lab-n} though. Get in touch with {course-teacher} for more info.
+
+A nice day,
+{from-name}

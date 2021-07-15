@@ -1,0 +1,9 @@
+Hej {to-name},
+detta gäller labb {lab-n} i kursen {course-name}.
+
+Tyvärr har du inte lämnat in något alls, eller så var koden du lämnade in inte ett tillräckligt seriöst försök. <strong>Du kommer behöva göra en ny inlämning av laborationen vid nästa kurstillfälle</strong>.
+
+Du kan fortfarande jobba med och lämna in kommande laborationer, de kan räknas som godkända nästa termin också. Dock kan du inte komplettera labb {lab-n}. Kontakta {course-teacher} för mer information.
+
+Hälsningar,
+{from-name}

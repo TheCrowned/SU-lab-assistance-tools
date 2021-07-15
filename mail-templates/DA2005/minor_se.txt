@@ -1,0 +1,14 @@
+Hej {to-name},
+detta gäller labb {lab-n} i kursen {course-name}.
+
+Du har gjort ett bra jobb hittills, men <strong>det finns några, om än små, problem som behöver ses över innan laborationen kan anses godkänd</strong>. Nedan ser du de delar som behöver korrigeras, och tips på hur det kan göra. <strong>Punkter markerade med en stjärna * måste fixas</strong>, de andra är INTE ett måste att se över (men du får förstås gärna göra det ändå).
+
+<strong>Du kan skicka tillbaka den rättade koden till mig, och behöver inte presentera den under ett labbtillfälle</strong> (du kan alltid be om hjälp ifall det behövs). Skicka den som en <strong>zip-fil</strong>.
+
+Det kan också finnas andra tips och punkter för framtida utveckling av din kod, samt positiva kommentarer. Ta lite tid att gå igenom dessa: jag förväntar mig att du tänker på dessa råd i framtida laborationer då du kan stöta på liknande situationer :) Du får såklart höra av dig ifall något behöver förtydligas.
+
+{tips-list}
+
+Bra jobbat!
+Hälsningar,
+{from-name}
