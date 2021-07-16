@@ -20,7 +20,7 @@ statuses = ['pass', 'minor', 'review', 'fail']
 
 # Teachers to whom to send revisions (for plagiarism checks)
 courses_teachers = {
-    'DA2004': 'Anders Mortberg',
+    'DA2004': 'Anders Mörtberg',
     'DA2005': 'Lars Arvestad',
     'MM5016': 'Stefano Ottolenghi' #for labs
 }
@@ -54,6 +54,11 @@ parser.add_argument(
     dest='feedback_file',
     help='File path in which feedback for this lab is to be found.')
 parser.add_argument(
+    '--feedback-lang',
+    required=True,
+    dest='feedback_lang',
+    help='Language of feedback template (only en/se supported)')
+parser.add_argument(
     '--send',
     #type=bool,
     default=False,
@@ -76,7 +81,7 @@ print('== On behalf of {} <{}>; lab {} of course {} ==\n'.format(
 # Fetch templates for all statuses
 templates = {}
 for status in statuses:
-    with open('mail-templates/'+args.course_name+'/'+status+'.txt') as f:
+    with open('mail-templates/'+args.course_name+'/'+status+'_'+args.feedback_lang+'.txt') as f:
         templates[status] = f.read().replace("\n", "<br />\n")
 
 # open file to store feedback preview on dry run
@@ -159,8 +164,8 @@ with open(args.feedback_file) as lab_feedback:
         #mail_content = re.sub(r"_([^_]+)_", "<em>\g<1></em>", mail_content)
         #mail_content = re.sub(r"\*([^\*]+)\*", "<strong>\g<1></strong>", mail_content)
 
-        # strip again non ascii chars
-        mail_content = unicodedata.normalize('NFKD', mail_content).encode('ascii', 'ignore').decode()
+        # normalize and utf-8 encode (supports swedish chars)
+        mail_content = unicodedata.normalize('NFKD', mail_content).encode('utf-8')
 
         emails[stud_email] = {
             'stud_email': stud_email,
@@ -168,8 +173,9 @@ with open(args.feedback_file) as lab_feedback:
             'content': mail_content
         }
 
+        # decode utf-8 bytes before append
         if not args.no_dry_run:
-            preview.write(mail_content+'<br /><hr /><br />')
+            preview.write(mail_content.decode('utf-8')+'<br /><hr /><br />')
 
 
 # open preview in browser if dry run
