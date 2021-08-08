@@ -81,12 +81,12 @@ print('== On behalf of {} <{}>; lab {} of course {} ==\n'.format(
 # Fetch templates for all statuses
 templates = {}
 for status in statuses:
-    with open('mail-templates/'+args.course_name+'/'+status+'_'+args.feedback_lang+'.txt') as f:
+    with open('mail-templates/'+args.course_name+'/'+status+'_'+args.feedback_lang+'.txt', encoding='utf-8') as f:
         templates[status] = f.read().replace("\n", "<br />\n")
 
 # open file to store feedback preview on dry run
 if not args.no_dry_run:
-    preview = open('preview-{}-lab{}.html'.format(args.course_name, args.lab_n), 'w')
+    preview = open('preview-{}-lab{}.html'.format(args.course_name, args.lab_n, encoding='utf-8'), 'w')
 
 headers = """From: {from-name} <{from-email}>
 To: {to-name} <{to-email}>
@@ -115,7 +115,7 @@ if args.no_dry_run:
 print() #nice output
 
 #with open('{}-lab{}.txt'.format(args.course_name, args.lab_n)) as lab_feedback:
-with open(args.feedback_file) as lab_feedback:
+with open(args.feedback_file, encoding='utf-8') as lab_feedback:
     stats = {status: [] for status in statuses}; skipped = [] # for final counts
 
     #different students are separated by 3 newlines
