@@ -142,7 +142,7 @@ with open(args.feedback_file, encoding='utf-8') as lab_feedback:
 
         #swedish chars in names need to go away
         #for runtime errors on this line, make sure you running with python3
-        stud_name = unicodedata.normalize('NFKD', stud_name).encode('ascii', 'ignore').decode()
+        #stud_name = unicodedata.normalize('NFKD', stud_name).encode('ascii', 'ignore').decode()
 
         #concatenate headers and replace placeholders in templates
         mail_content = headers + mail_content
@@ -164,8 +164,8 @@ with open(args.feedback_file, encoding='utf-8') as lab_feedback:
         #mail_content = re.sub(r"_([^_]+)_", "<em>\g<1></em>", mail_content)
         #mail_content = re.sub(r"\*([^\*]+)\*", "<strong>\g<1></strong>", mail_content)
 
-        # normalize and utf-8 encode (supports swedish chars)
-        mail_content = unicodedata.normalize('NFKD', mail_content).encode('utf-8')
+        # utf-8 encode (supports swedish chars)
+        mail_content = mail_content.encode('utf-8')
 
         emails[stud_email] = {
             'stud_email': stud_email,
