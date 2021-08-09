@@ -7,7 +7,7 @@ It supports a number of command line arguments, call it with `-h` to see the det
 
 Here a sample run:
 
-`python3 send-results.py --course-name DA2004 --lab-n 2 --from-name "Stefano Ottolenghi" --from-email "stefano@math.su.se" --feedback-file ex-DA2004-lab2.txt`
+`python3 send-results.py --course-name DA2004 --lab-n 2 --from-name "Stefano Ottolenghi" --from-email "stefano@math.su.se" --feedback-file ex-DA2004-lab2.txt --feedback-lang en`
 
 This will take feedback contained in the file `ex-DA2004-lab2.txt`, build emails for it, and output them all in a single html file as a preview (which, if you are on linux, should pop up in the browser automatically - otherwise, look for a file called `preview-COURSENAME-LABN.html` in the directory where you run the script.
 
@@ -35,7 +35,7 @@ The convention is to note with a star the feedback points that were compulsory t
 The current statuses are `pass, minor, review, fail, none` and should all be self-explanatory, except for `none`. That is used for a student who did not submit anything for that lab. The only manual work needed at course start is to create a feedback template file, with all students names and emails and the correct structure, to duplicate and to write into for every lab.
 
 ## Email templates
-The actual texts of the emails are contained into the 4 text files inside the directory `mail-templates/{course-name}`. There must be a file `{status}.txt` for each of the statuses we have. It should be straightforward to add a new status in the future (i.e. add the status to a list in the script and provide the corresponding email template in the directory).
+The actual texts of the emails are contained into the 8 text files inside the directory `mail-templates/{course-name}`. There must be a file `{status}_{feedback-lang}.txt` for each of the statuses we have, and preferred feedback language. It should be straightforward to add a new status in the future (i.e. add the status to a list in the script and provide the corresponding email template in the directory).
 
 Email templates _can_ contain HTML markup, plus a number of placeholders that are replaced per-mail with dynamic content. Supported placeholders are `{to-name}, {to-email}, {from-name}, {from-email}, {course-name}, {course-teacher}, {lab-n}, {tips-list}`.
 
