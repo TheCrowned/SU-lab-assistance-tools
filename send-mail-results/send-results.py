@@ -118,6 +118,11 @@ with open(args.feedback_file) as lab_feedback:
 
     for student in students:
         splitted_single = student.split('\n')
+
+        # empty students are probably just trailing file empty lines
+        if len(splitted_single) == 0:
+            continue
+
         stud_name = splitted_single[0]
         stud_email = splitted_single[1]
         status = splitted_single[2]
