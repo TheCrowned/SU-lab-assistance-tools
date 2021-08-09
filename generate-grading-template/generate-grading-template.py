@@ -46,23 +46,22 @@ def main():
         print('Lab N, TAs total or TA_n is missing, so you will just get a grading template for all students.')
         filename = 'grading-template.txt'
         dump_students_to_file(students, filename)
+
     else:
-        start = lambda K: int(floor(J/M) * ( ((N-1) + (K-1)) % M ) + ( ( J % M - (K-1) ) > 0 ))
+        # How many students should there be in each group? z is group ID
+        how_many = lambda z: int(floor(J/M) + ((J%M - (z-1))>0))
 
-        '''idxs = [(0, start(2))]
-        for i in range(2,M+1):
-            idxs.append((idxs[-1][1]+1, start((i+1)%M)))
-        idxs[-1] = (idxs[-1][0], J)
-        print(idxs)'''
+        # Build list with indexes of each group boundaries
+        groups = [(0, how_many(1))]
+        for i in range(2, M+1):
+            groups.append((groups[-1][1], groups[-1][1] + how_many(i)))
 
-        start_index = start(K)
-        end_index = start((K+1)%M)
-        if end_index == 0:
-            end_index = J
+        # Pick group for given TA according to rotation
+        group_choser = ((N-1)+(K-1)) % M
+        start_index = groups[group_choser][0]
+        end_index = groups[group_choser][1]
 
-        print('TA {} takes {} out of {} students'.format(K, end_index-start_index, J))
-        print('K, {}'.format(start_index))
-        print('K+1, {}'.format(end_index))
+        print('TA {} takes {} out of {} students, with indexes {}'.format(K, end_index-start_index, J, groups[group_choser]))
         filename = 'lab{}-TA{}.txt'.format(N, K)
         #print(students[start_index:end_index])
         dump_students_to_file(students[start_index:end_index], filename)
