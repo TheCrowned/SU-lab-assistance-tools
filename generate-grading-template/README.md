@@ -22,4 +22,4 @@ where
 
 **If N, M, or K are not given**, the script will just spit a grading template will all students together.
 
-**How does it work?** Basing on ~a sophisticated piece of number theory~ an empirically-derived formula with many modulo operations. It just seems to work. Check lines 66 to 77 if you are curious.
+**How does it work?** Basing on ~~a sophisticated piece of math~~ an empirically-derived formula with many modulo operations. It just seems to work. Check lines 66 to 77 if you are curious.
