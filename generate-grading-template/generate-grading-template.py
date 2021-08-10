@@ -1,3 +1,12 @@
+"""
+Rough script to generate text grading templates from PeerGrade/Moodle csv files.
+Output can then be fed to the send-results script.
+
+@author Stefano Ottolenghi <stefano@math.su.se>
+        Thanks to Emilia Dunfelt for suggestions/testing.
+@date August 2021
+"""
+
 import argparse
 import csv
 from math import floor
@@ -28,24 +37,30 @@ def main():
         type=int,
         dest='TA_n',
         help='The TA ID for which you wish to see the students list to grade')
+    parser.add_argument(
+        '--no-enforce-reviews',
+        default=True,
+        action='store_false',
+        dest='enforce_reviews',
+        help='Whether grading status should (not) be set to `minor` if PeerGrade reviews were not done')
     args = parser.parse_args()
 
     # Shortcuts
     csv_path = args.csv_file
+    enforce_reviews = args.enforce_reviews
     N = args.lab_n
     M = args.TAs_total
     K = args.TA_n
 
+    # Proper main
     students = parse_csv_to_dict(csv_path)
     students = maybe_purge_nohandin_students(students)
     J = len(students)
 
-    #print(students)
-
     if N == None or M == None or K == None:
         print('Lab N, TAs total or TA_n is missing, so you will just get a grading template for all students.')
         filename = 'grading-template.txt'
-        dump_students_to_file(students, filename)
+        dump_students_to_file(students, filename, False)
 
     else:
         # How many students should there be in each group? z is group ID
@@ -63,11 +78,22 @@ def main():
 
         print('TA {} takes {} out of {} students, with indexes {}'.format(K, end_index-start_index, J, groups[group_choser]))
         filename = 'lab{}-TA{}.txt'.format(N, K)
-        #print(students[start_index:end_index])
-        dump_students_to_file(students[start_index:end_index], filename)
+        dump_students_to_file(students[start_index:end_index], filename, enforce_reviews)
+
 
 def parse_csv_to_dict(csv_path):
-    """Parses csv into a dict"""
+    """Parses csv into a dict
+
+    Input
+    -----
+    csv_path : string
+        Path to csv file containing student info.
+
+    Output
+    ------
+    students : dict
+        Alphabetically sorted dict of students with info from csv.
+    """
 
     students = []
     with open(csv_path, 'r') as handle:
@@ -83,13 +109,20 @@ def parse_csv_to_dict(csv_path):
             # If file has info about current lab (ie comes from peergrade), use it
             if len(fields) > 2:
                 student['lab_handedin'] = row[fields[2]]
+            # If file has info about peergrading, use it
+            if len(fields) > 3:
+                student['reviews'] = row[fields[3]]
 
             students.append(student)
+            # enforce alphabetical sort by name
             students = sorted(students, key=lambda k: k['name'])
 
     return students
 
+
 def maybe_purge_nohandin_students(students):
+    """Remove students that did not hand in."""
+
     purged_students = []
     for student in students:
         if student.get('lab_handedin'):
@@ -97,21 +130,37 @@ def maybe_purge_nohandin_students(students):
                 purged_students.append(student)
         else: #lacking handin info
             purged_students.append(student)
+
     return purged_students
 
-def dump_students_to_file(students, filename):
+
+def dump_students_to_file(students, filename, enforce_reviews):
+    """Write a grading template text file that can be later used with send-results.py.
+
+    Input
+    -----
+    students : dict
+    filename : str
+        Output file name
+    enforce_reviews : bool
+        If True, students who did not complete reviews will automatically get
+        `minor` as status, and a note about not having completed reviews.
+    """
+
     with open(filename, 'w') as handle:
         for student in students:
-
-            # If we have handedin info, only include students who have handed in
-            if student.get('lab_handedin') and student['lab_handedin'] == 'No':
-                continue
-
             handle.write('{}\n'.format(student['name']))
             handle.write('{}\n'.format(student['email']))
-            handle.write('none\n') #status
+
+            if (enforce_reviews == True
+            and student.get('reviews') and student['reviews'][0] == '0'):
+                handle.write('minor\n') #status is minor is reviews were not done
+                handle.write('- * PeerGrade reviews were not done.\n')
+            else:
+                handle.write('none\n')
 
             handle.write('\n\n') #spacing between students
+
 
 if __name__ == '__main__':
     main()
