@@ -92,7 +92,7 @@ headers = """From: {from-name} <{from-email}>
 To: {to-name} <{to-email}>
 Subject: Result of Lab {lab-n} ({course-name})
 MIME-Version: 1.0
-Content-type: text/html
+Content-Type: text/html; charset="UTF-8"
 
 """
 #the trailing line break in headers matters!
