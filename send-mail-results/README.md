@@ -1,6 +1,6 @@
 A script to send lab feedback and results to students.
 
-It generates HTML emails with some rough formatting. In particular, it supports backticks \` for inline code and triple backticks \`\`\` for a block of code. I would have also wanted to add bold and italic with \* and \_, but when they get nested inside code blocks it gets quite messy, so I just gave up. I hardcoded some bold in the email templates, but we cannot put any in the feedback we write.
+It generates HTML emails with some rough formatting. In particular, it supports backticks \` for inline code and triple backticks \`\`\` for a block of code. I would have also wanted to add bold and italic with \* and \_, but when they get nested inside code blocks it gets quite messy, so I just gave up. I hardcoded some bold in the email templates, but we cannot put any in the feedback we write. 
 
 ## How to run it
 It supports a number of command line arguments, call it with `-h` to see the details.
@@ -29,6 +29,7 @@ Status (one among [pass, fail, review, none])
 even with an empty line it's okay, as long as it's not 2 (otherwise it becomes a new student)
 - last feedback line
 ```
+- it is possible to have comments within the feedback section, that won't be sent out with the emails. They need to be enclosed by a double hashtag (ex. ##this is a comment##).
 
 The convention is to note with a star the feedback points that were compulsory to be corrected to pass the lab, in case the current result was fail. I also always put them at the top for clarity.
 

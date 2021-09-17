@@ -164,6 +164,7 @@ with open(args.feedback_file, encoding='utf-8') as lab_feedback:
 
         mail_content = re.sub(r"```([^`]+)```", "<pre>\g<1></pre>", mail_content)
         mail_content = re.sub(r"`([^`]+)`", "<code>\g<1></code>", mail_content)
+        mail_content = re.sub(r"##([^#]+)##", "", mail_content) # strip comments
 
         #underscores/stars are often in code, difficult to parse -> avoid
         #mail_content = re.sub(r"_([^_]+)_", "<em>\g<1></em>", mail_content)
