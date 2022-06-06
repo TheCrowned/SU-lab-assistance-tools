@@ -1,7 +1,7 @@
 Hej {to-name},
 detta gäller labb {lab-n} i kursen {course-name}.
 
-Du har gjort ett bra jobb och <strong>är godkänd på laborationen</strong>! Nedan följer några tips och punkter för framtida utveckling av din kod, samt positiva kommentarer. Ta lite tid att gå igenom dessa: jag förväntar mig att du tänker på dessa råd i framtida laborationer då du kan stöta på liknande situationer :) 
+Du har gjort ett bra jobb och <strong>är godkänd på laborationen</strong>! Nedan hittar du en sammanfattning av labbresultaten och antalet poäng du fått på varje uppgift. Du kanske också fått några tips och synpunkter för framtida utveckling av din kod, samt positiva kommentarer. Ta lite tid att gå igenom dessa: jag förväntar mig att du tänker på dessa råd i framtida laborationer då du kan stöta på liknande situationer :)
 
 Du får såklart höra av dig ifall något behöver förtydligas. Notera att ingenting behöver kompletteras - men gå gärna igenom listan och se till att allt känns tydligt!
 
