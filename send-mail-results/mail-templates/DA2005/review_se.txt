@@ -5,7 +5,7 @@ Du har gjort ett <strong>bra jobb hittills, men det finns några problem som beh
 
 När du har rättat din kod <strong>måste du <em>(i den här ordningen)</em>:
 1. visa och presentera den nya koden för mig under ett labbtillfälle</strong> (och kan också be om vidare hjälp då, ifall det behövs);
-<strong>2. skicka den uppdaterade koden till {course-teacher} via mail.</strong>
+<strong>2. skicka den uppdaterade koden till mig via mail.</strong>
 
 Det kan också finnas andra tips och punkter för framtida utveckling av din kod, samt positiva kommentarer. Ta lite tid att gå igenom dessa: jag förväntar mig att du tänker på dessa råd i framtida laborationer då du kan stöta på liknande situationer :) Du får såklart höra av dig ifall något behöver förtydligas.
 
